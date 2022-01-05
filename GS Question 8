@@ -1,0 +1,28 @@
+link to the problem : https://practice.geeksforgeeks.org/problems/total-decoding-messages1235/1/
+
+int CountWays(string str){
+		    long long t[str.size()+1],mod=1e9 + 7;
+		    
+		    t[0]=1;
+		    if(str[0]=='0')
+		        t[1]=0;
+		    else
+		        t[1]=1;
+		    for(int i=2; i<=str.size(); i++)
+		    {
+		        if(str[i-1]=='0'){
+		            if (str[i-2]=='1' || str[i-2]=='2')
+		                t[i]=t[i-2];
+		            else
+		                return 0;
+		        }
+		        else{
+		            if(str[i-2]=='1' || (str[i-2]=='2' && str[i-1]<'7'))
+		                t[i]=t[i-1]+t[i-2];
+		            else
+		                t[i]=t[i-1];
+		        }
+		        t[i]%=mod;
+		    }
+		    return t[str.size()]%mod;
+		}
