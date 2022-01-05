@@ -1,0 +1,22 @@
+vector<int> maxTenNumbers(vector<int> &arr)
+{
+    int n = arr.size();
+    vector<int> max10ele;
+    
+    priority_queue<int, vector<int>, greater<int>> myPQ;
+    
+    for(int i=0; i<10; i++)
+       myPQ.push(arr[i]);
+    
+    for(int i=10; i<n; i++){
+        if(arr[i]>myPQ.top()){
+            myPQ.pop();
+           myPQ.push(arr[i]);
+        }
+    }
+    while(!myPQ.empty()){
+        max10ele.push_back(myPQ.top());
+        myPQ.pop();
+    }
+  return max10ele;
+}
