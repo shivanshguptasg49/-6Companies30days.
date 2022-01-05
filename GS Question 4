@@ -1,0 +1,16 @@
+Link to the problem : https://practice.geeksforgeeks.org/problems/run-length-encoding/1/
+
+string encode(string src)
+{     
+    string ans = "";
+    int count = 0, start=0;
+    while(start<src.size()){
+        while(src[count]==src[start])
+            start++;
+            
+        ans+=src[count]+to_string(start-count);
+        count=start;
+    }
+        
+    return ans;
+}     
