@@ -1,0 +1,15 @@
+Link to the problem : https://practice.geeksforgeeks.org/problems/array-pair-sum-divisibility-problem3257/1
+
+bool canPair(vector<int> nums, int k) {
+        unordered_map<int,int> myMap;
+        for(int i=0; i<nums.size(); i++){
+            myMap[nums[i]%k]++;
+        }
+        if(myMap[0]%2!=0)
+            return false;
+        for(int i=1; i<k; i++){
+            if(myMap[i]!=myMap[k-i])
+                return false;
+        }
+        return true;
+    }
