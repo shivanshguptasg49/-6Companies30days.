@@ -1,0 +1,32 @@
+Link to the problem: https://leetcode.com/problems/longest-mountain-in-array/
+
+class Solution {
+public:
+    int longestMountain(vector<int>& arr) {
+        int n = arr.size();
+        int length=0;
+        
+        for(int i=1; i<n; i++)
+        {   
+            int count=1;
+            int up=i;
+            int flag=0;
+            while(up<n && arr[up]>arr[up-1]){
+                up++;
+                count++;
+            }
+            
+            while(up<n && up!=i && arr[up]<arr[up-1]){
+                up++;
+                count++;
+                flag=1;
+            }
+            if(i!=up && flag && count>2){
+                length=max(length, count);
+                up--;
+            }
+            i=up;
+        }
+         return length;
+    }
+};
