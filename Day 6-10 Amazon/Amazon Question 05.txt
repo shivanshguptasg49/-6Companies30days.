@@ -1,0 +1,30 @@
+Link to the problem: https://practice.geeksforgeeks.org/problems/phone-directory4628/1/#
+
+class Solution{
+public:
+   vector<vector<string>> displayContacts(int n, string A[], string s)
+    {
+        
+        set<string> uniqStrings(A, A + n);
+        vector<string> contact = vector<string>(uniqStrings.begin(), uniqStrings.end());
+        vector<vector<string>> ans;
+        ans.push_back(contact);
+        
+        for(int i = 0; i < s.size(); i++) {
+            vector<string> temp;
+            
+            for(int j = 0; j < ans.back().size(); j++) {
+                if(ans.back()[j][i] == s[i]) 
+                    temp.push_back(ans.back()[j]);
+            }
+            if(temp.empty()) 
+                temp.push_back("0");
+            
+            if(i == 0) 
+                ans.pop_back();
+            ans.push_back(temp);
+        }
+        
+        return ans;
+    }
+};

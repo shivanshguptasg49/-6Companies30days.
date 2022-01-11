@@ -1,0 +1,64 @@
+Link to the problem: https://leetcode.com/problems/rotting-oranges/
+
+class Solution {
+public:
+    int orangesRotting(vector<vector<int>>& grid) {
+        int r=grid.size();
+        int c=grid[0].size();
+        queue<pair<int,int>>myQueue;
+        int countUnrotn=0;
+        for(int i=0;i<r;i++){
+            for(int j=0;j<c;j++){
+                if(grid[i][j]==2)
+                    myQueue.push({i,j});
+                if(grid[i][j]==1)
+                    countUnrotn++;
+            }
+        }
+        if(!countUnrotn)
+            return 0;
+        myQueue.push({-1,-1});
+        int ans=0;
+        while(!myQueue.empty())
+        {
+            pair<int,int>currCell=myQueue.front();
+            myQueue.pop();
+            int i=currCell.first,j=currCell.second;
+            if(i==-1&&j==-1){
+	            if(!myQueue.empty()){
+					myQueue.push({-1,-1});
+	              	ans++;
+	            }
+            	continue;
+            }
+            
+            if(i+1<r&&grid[i+1][j]==1){
+                grid[i+1][j]=2;
+                countUnrotn--;
+                myQueue.push({i+1,j});
+            }
+            
+            if(j-1>=0&&grid[i][j-1]==1){
+                grid[i][j-1]=2;
+                countUnrotn--;
+                myQueue.push({i,j-1});
+            }
+            
+            if(j+1<c&&grid[i][j+1]==1){
+                grid[i][j+1]=2;
+                countUnrotn--;
+                myQueue.push({i,j+1});
+            }
+            
+            if(i-1>=0&&grid[i-1][j]==1){
+                grid[i-1][j]=2;
+                countUnrotn--;
+                myQueue.push({i-1,j});
+            }
+ 
+        }
+       if(countUnrotn>0)
+           return -1;
+        return ans;
+    }
+};

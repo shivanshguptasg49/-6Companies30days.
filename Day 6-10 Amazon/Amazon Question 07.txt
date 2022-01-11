@@ -1,0 +1,23 @@
+link to the question: https://practice.geeksforgeeks.org/problems/first-non-repeating-character-in-a-stream1216/1
+
+public:
+		string FirstNonRepeating(string A){
+		    queue<int> myQueue;
+		    int temp[26]={0};
+		    for(int i=0;i<A.size();i++){
+		        temp[A[i]-'a']++;
+		        if(temp[A[i]-'a']==1)
+		            myQueue.push(A[i]);
+		        
+		        while(!myQueue.empty() && temp[myQueue.front()-'a']!=1)
+		            myQueue.pop();
+		        
+		        
+		        if(myQueue.empty())
+		            A[i]='#';
+		        else
+		            A[i]=myQueue.front();
+		        
+		    }
+		    return A;
+		}
