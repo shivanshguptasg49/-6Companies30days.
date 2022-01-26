@@ -1,0 +1,37 @@
+Link to the problem: https://practice.geeksforgeeks.org/problems/prerequisite-tasks/1/
+
+public:
+unordered_map<int,vector<int>> adl;
+	bool isPossible(int N, vector<pair<int, int> >& prerequisites) {
+	    
+	    for(auto p:prerequisites)
+	        adl[p.first].push_back(p.second);
+	        
+	   vector<bool> current(N,false);
+	   vector<bool> visited(N,false);
+	   
+	   
+	   for(int node=0;node<N;node+=1)
+	        if(!visited[node] and dfs(N,current,visited,node))
+	            return false;
+	   
+	  
+	    return true;
+	}
+	
+	bool dfs(int N,vector<bool> &current,vector<bool>&visited,int node)
+	{
+	    if(visited[node])
+	        return false;
+	        
+	   current[node]=true;
+	   visited[node]=true;
+	   
+	   for(auto n:adl[node])
+	        if(current[n] or dfs(N,current,visited,n))
+	            return true;
+	    
+	  current[node]=false;
+	  return false;
+	    
+	}

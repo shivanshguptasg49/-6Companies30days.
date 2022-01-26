@@ -1,0 +1,26 @@
+Link to the problem : https://practice.geeksforgeeks.org/problems/count-number-of-subtrees-having-given-sum/1/
+
+int buildSumTree(Node* root,int X,int &count)
+{
+    if(!root)
+        return 0;
+    
+    int left = buildSumTree(root->left,X,count);
+    int right = buildSumTree(root->right,X,count);
+    
+    root->data+= left+right;
+    
+    if(root->data==X)
+        count+=1;
+    return root->data;
+    
+    
+}
+int countSubtreesWithSumX(Node* root, int X)
+{
+	// Code here
+	int count = 0;
+	buildSumTree(root,X,count);
+	return count;
+	
+}

@@ -1,0 +1,64 @@
+Link to the problem: https://practice.geeksforgeeks.org/problems/alien-dictionary/1/
+
+class Solution{
+    public:
+    unordered_map<int,vector<int>> adl;
+    
+    string findOrder(string dict[], int N, int K) {
+        //code here
+        string ans;
+        stack<int> st;
+        for(int i=0;i<N-1;i+=1)
+        {
+            addEdge(dict[i],dict[i+1]);
+        }
+        
+        vector<bool> visited(26,false);
+        for(int i=0;i<=25;i+=1)
+        {
+            if(adl.find(i)!=adl.end() and !visited[i])
+            {
+                topologicalSort(visited,i,st);
+            }
+        }
+        
+        while(!st.empty())
+            ans+=('a'+st.top()),st.pop();
+        return ans;
+        
+    }
+    
+    void topologicalSort(vector<bool> &visited,int node,stack<int> &st)
+    {
+        if(!visited[node])
+        {
+            visited[node]=true;
+            for(auto n:adl[node])
+                topologicalSort(visited,n,st);
+            
+            
+            st.push(node);
+        }
+        
+        
+    }
+    
+    void addEdge(string &l, string &r)
+    {
+        
+        int i=0;
+        int j=0;
+        while(i<l.length() and j<r.length() and l[i]==r[i])
+        {
+            i+=1;
+            j+=1;
+        }
+        
+        if(i>=l.length() or j>=r.length())
+            return;
+            
+        adl[l[i]-'a'].push_back(r[j]-'a');
+        
+        
+    }
+};

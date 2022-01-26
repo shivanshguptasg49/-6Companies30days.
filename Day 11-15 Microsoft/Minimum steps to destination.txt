@@ -1,0 +1,21 @@
+Link to the problem: https://practice.geeksforgeeks.org/problems/minimum-number-of-steps-to-reach-a-given-number5234/1/
+
+        D=abs(D);
+        int steps=0;
+        long long pos=0;
+        
+        while(true)
+        {
+            steps+=1;
+            pos+=steps;
+            
+            if(pos==D)
+                return steps;
+                
+            else if((pos>D) and !((pos-D)%2))
+                    return steps;
+            
+        }
+        
+        return 0;
+    }
