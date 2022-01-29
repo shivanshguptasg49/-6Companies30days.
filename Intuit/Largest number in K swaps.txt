@@ -1,0 +1,38 @@
+Link to the problem: https://practice.geeksforgeeks.org/problems/largest-number-in-k-swaps-1587115620/1
+
+public:
+    string findMaximumNum(string str, int k)
+    {
+       string ans=str;
+       recur(str,0,k,ans);
+       return ans;
+    }
+    
+    void recur(string &str,int pos,int k,string &ans)
+    {
+        if(!k){
+            return;
+        }
+        char m = str[pos];
+        for(int i =pos+1;i<str.length();i+=1)
+        {
+            m=max(m,str[i]);
+        }
+        
+        if(m!=str[pos])
+            k--;
+        
+        
+        for(int i=str.length()-1;i>=pos;i--)
+        {
+            if(m==str[i])
+            {
+                swap(str[i],str[pos]);
+                if(str.compare(ans)>0)
+                    ans=str;
+                recur(str,pos+1,k,ans);
+                swap(str[i],str[pos]);
+            }
+                
+        }
+    }
