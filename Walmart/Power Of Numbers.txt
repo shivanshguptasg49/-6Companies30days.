@@ -1,0 +1,17 @@
+Link to the problem:https://practice.geeksforgeeks.org/problems/power-of-numbers-1587115620/1/?company[]=Walmart&company[]=Walmart&page=1&query=company[]Walmartpage1company[]Walmart
+
+ long long power(int N,int R)
+    {
+        
+        if(R==0) 
+            return 1;
+        if(R==1)
+            return N;
+        long long ans=power(N, R/2)%mod;
+        ans=(ans*ans)%mod;
+        if(R%2==0) 
+            return ans%mod;
+        else 
+            return (ans*N)%mod;
+        
+    }

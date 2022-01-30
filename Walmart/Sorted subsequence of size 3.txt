@@ -1,0 +1,21 @@
+Link to the problem: https://practice.geeksforgeeks.org/problems/sorted-subsequence-of-size-3/1/
+
+
+vector<int> find3Numbers(vector<int> arr, int N) {
+        stack<int> help;
+        for(int i=N-1;i>=0;i--){
+            while(!help.empty()&&help.top()<=arr[i])
+                help.pop();    
+            help.push(arr[i]); 
+            if(help.size()==3)
+                break; 
+        }
+        vector<int> ans;
+        while(!help.empty()){
+           ans.push_back(help.top());
+           help.pop();
+        }
+        if(ans.size()!=3)
+            return {};
+       return ans;
+    }
