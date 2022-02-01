@@ -4,28 +4,19 @@ public:
 
     vector <int> calculateSpan(int price[], int n)
     {
-       stack<int> mystack;
-       vector<int> ans(n,1);
-       
-       mystack.push(0);
-       
-       for(int i =1;i<n;i+=1)
-       {
-            if(price[i]<price[mystack.top()])
-                mystack.push(i);
+       vector<int> ans;
+       stack<int> help;
+       for(int i=0; i<n; i++)
+       {    
+            while(!help.empty() && price[help.top()]<=price[i])
+                help.pop();
+           
+            if(help.empty())
+                ans.push_back(i+1);
             else
-            {
-                int c = 0;
-                while(!mystack.empty() and price[mystack.top()]<=price[i])
-                {
-                    c+=ans[mystack.top()];
-                    mystack.pop();
-                }
-                mystack.push(i);
-                ans[i]+=c;
+                ans.push_back(i-help.top());
                 
-            }
-        }
-        
-        return ans;
+            help.push(i);
+       }
+       return ans;
     }
